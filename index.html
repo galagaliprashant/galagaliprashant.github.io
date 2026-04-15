@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prashanth Galagali — Systems. Growth. Life.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream:    #f5f0e8;
+  --cream-2:  #ede8da;
+  --cream-3:  #e2dcd0;
+  --white:    #fdfcf9;
+  --ink:      #1a1a2e;
+  --ink-2:    #333348;
+  --ink-3:    #6b6b85;
+  --ink-4:    #a8a8be;
+  --yellow:   #f5c842;
+  --yellow-d: #e8b830;
+  --coral:    #f07050;
+  --coral-d:  #d95a38;
+  --coral-lt: #fce9e4;
+  --teal:     #3d9e8e;
+  --teal-lt:  #dff2ef;
+  --blue:     #3d6abf;
+  --blue-lt:  #e5edf9;
+  --purple:   #7c6fcd;
+  --purple-lt:#ede9ff;
+  --border:   rgba(26,26,46,0.09);
+  --border-2: rgba(26,26,46,0.15);
+  --h:        'Nunito', sans-serif;
+  --b:        'DM Sans', sans-serif;
+  --r:        14px;
+  --r-lg:     22px;
+  --r-xl:     28px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:var(--b);font-size:16px;line-height:1.65;overflow-x:hidden}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 52px;height:66px;
+  background:rgba(245,240,232,0.92);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.logo{font-family:var(--h);font-size:21px;font-weight:900;color:var(--ink);text-decoration:none;letter-spacing:-.4px}
+.logo span{background:var(--yellow);border-radius:6px;padding:1px 5px;margin-left:1px}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{font-size:15px;font-weight:500;color:var(--ink-2);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--coral)}
+.nav-cta{background:var(--coral)!important;color:#fff!important;padding:9px 22px;border-radius:100px;font-weight:700!important;font-size:14px!important;transition:all .2s!important}
+.nav-cta:hover{background:var(--coral-d)!important;transform:translateY(-1px)}
+
+/* HERO */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:90px 52px 64px;position:relative;overflow:hidden;
+}
+/* background blobs */
+.blob{position:absolute;border-radius:50%;pointer-events:none;z-index:0}
+.blob-1{width:500px;height:500px;background:radial-gradient(circle,rgba(245,200,66,.12) 0%,transparent 65%);top:-80px;left:-80px}
+.blob-2{width:400px;height:400px;background:radial-gradient(circle,rgba(61,158,142,.08) 0%,transparent 65%);bottom:-60px;right:-60px}
+
+.hero-wrap{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:440px 1fr;
+  align-items:center;gap:0;max-width:1100px;margin:0 auto;width:100%;
+}
+
+/* photo column */
+.photo-col{position:relative;display:flex;align-items:center;justify-content:center;padding:20px}
+
+.yellow-bg{
+  width:370px;height:370px;border-radius:50%;
+  background:var(--yellow);
+  position:relative;display:flex;align-items:flex-end;justify-content:center;
+  overflow:visible;
+}
+.photo-frame{
+  width:340px;height:390px;
+  border-radius:200px 200px 0 0;
+  background:linear-gradient(160deg,var(--cream-2),var(--cream-3));
+  position:absolute;bottom:0;
+  border:3px solid rgba(26,26,46,.07);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  overflow:hidden;
+  /* Replace the content inside with: <img src="your-photo.jpg" style="width:100%;height:100%;object-fit:cover;object-position:top"> */
+}
+.photo-initials{
+  font-family:var(--h);font-size:100px;font-weight:900;
+  color:var(--coral);opacity:.15;line-height:1;user-select:none;
+}
+.photo-add-note{
+  position:absolute;bottom:16px;
+  font-size:11px;font-weight:600;color:var(--ink-3);
+  background:rgba(253,252,249,.9);border-radius:100px;
+  padding:5px 14px;border:1px solid var(--border-2);
+}
+
+/* floating location chip */
+.location-chip{
+  position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);
+  background:var(--white);border:1px solid var(--border-2);
+  border-radius:100px;padding:9px 20px;
+  font-size:13px;font-weight:600;color:var(--ink);
+  box-shadow:0 4px 20px rgba(26,26,46,.10);
+  white-space:nowrap;
+}
+
+/* deco */
+.deco-star{position:absolute;z-index:2}
+.deco-dots-grid{position:absolute;z-index:2;display:grid;grid-template-columns:repeat(4,7px);gap:5px}
+.dg-dot{width:7px;height:7px;border-radius:50%;background:var(--coral);opacity:.45}
+
+/* text column */
+.text-col{padding-left:60px}
+.greeting{
+  font-family:var(--h);font-weight:900;
+  font-size:clamp(42px,5.5vw,70px);
+  line-height:1.06;letter-spacing:-2px;
+  color:var(--ink);margin-bottom:6px;
+}
+.wave{display:inline-block;animation:wave 2.8s ease-in-out infinite;margin-left:4px;font-size:.9em}
+@keyframes wave{0%,100%{transform:rotate(0deg)}25%{transform:rotate(22deg)}75%{transform:rotate(-10deg)}}
+
+.name-line{position:relative;display:inline-block}
+.name-line::after{
+  content:'';position:absolute;left:0;bottom:-8px;width:100%;height:8px;
+  background:url("data:image/svg+xml,%3Csvg viewBox='0 0 260 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 9 C60 2,110 10,160 5 S220 9,257 5' stroke='%233d9e8e' stroke-width='3.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+}
+
+.hero-bio{
+  font-size:19px;color:var(--ink-2);line-height:1.72;
+  font-weight:400;margin:28px 0 32px;max-width:490px;
+}
+.hero-bio strong{color:var(--ink);font-weight:700}
+.hero-bio a{color:var(--ink);font-weight:700;text-decoration:underline;text-decoration-color:var(--coral);text-underline-offset:3px}
+
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
+.btn-fill{
+  background:var(--coral);color:#fff;
+  padding:13px 26px;border-radius:100px;
+  font-family:var(--b);font-size:16px;font-weight:700;
+  text-decoration:none;border:none;cursor:pointer;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:all .2s;
+}
+.btn-fill:hover{background:var(--coral-d);transform:translateY(-2px);box-shadow:0 8px 24px rgba(240,112,80,.28)}
+.btn-out{
+  background:transparent;color:var(--ink);
+  padding:13px 26px;border-radius:100px;
+  font-family:var(--b);font-size:16px;font-weight:600;
+  text-decoration:none;border:2px solid var(--border-2);transition:all .2s;
+}
+.btn-out:hover{border-color:var(--ink)}
+
+.chips{display:flex;gap:9px;flex-wrap:wrap}
+.chip{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--white);border:1px solid var(--border-2);
+  border-radius:100px;padding:8px 16px;
+  font-size:14px;font-weight:500;color:var(--ink-2);
+  box-shadow:0 2px 8px rgba(26,26,46,.05);
+}
+.chip-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* SUBSCRIBE — Ali Abdaal LifeNotes exact style */
+.sub-wrap{padding:48px 52px;position:relative}
+.sub-card{
+  background:var(--white);border:1px solid var(--border-2);
+  border-radius:var(--r-xl);padding:52px 60px;
+  display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;
+  max-width:1100px;margin:0 auto;
+  box-shadow:0 4px 32px rgba(26,26,46,.07);
+  position:relative;z-index:1;
+}
+.sub-title-top{font-family:var(--h);font-size:34px;font-weight:400;color:var(--ink);line-height:1.2;display:block}
+.sub-title-bold{font-family:var(--h);font-size:46px;font-weight:900;color:var(--ink);line-height:1.05;letter-spacing:-1.5px;display:block;margin-bottom:16px}
+.sub-plane-svg{display:inline-block;margin-left:8px;vertical-align:middle}
+.sub-community{font-size:15px;color:var(--ink-2);margin-bottom:18px;line-height:1.55}
+.sub-community strong{color:var(--ink);font-weight:700}
+.sub-social-proof{display:flex;align-items:center;gap:14px}
+.sub-avatars{display:flex}
+.sub-avatar{width:38px;height:38px;border-radius:50%;border:2.5px solid var(--white);margin-left:-10px;background:var(--cream-2);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:var(--ink-2);overflow:hidden;flex-shrink:0}
+.sub-avatar:first-child{margin-left:0}
+.sub-stars{display:flex;gap:2px;margin-bottom:3px}
+.sub-star{color:#f5c842;font-size:15px}
+.sub-reviews{font-size:12px;color:var(--ink-3);font-weight:500}
+.sub-desc{font-size:16px;color:var(--ink-2);line-height:1.72;margin-bottom:22px}
+.sub-form{
+  display:flex;gap:0;
+  border:1.5px solid var(--border-2);border-radius:100px;
+  background:var(--cream);padding:5px 5px 5px 22px;
+  align-items:center;
+}
+.sub-in{flex:1;background:transparent;border:none;padding:9px 4px;font-size:15px;font-family:var(--b);color:var(--ink);outline:none}
+.sub-in::placeholder{color:var(--ink-4)}
+.sub-btn{
+  background:#3bc4b8;color:#fff;border:none;
+  border-radius:100px;padding:11px 28px;
+  font-size:15px;font-weight:700;font-family:var(--b);
+  cursor:pointer;white-space:nowrap;transition:all .2s;flex-shrink:0;
+}
+.sub-btn:hover{background:#2da89d}
+.sub-disclaimer{font-size:12px;color:var(--ink-4);margin-top:14px;line-height:1.65}
+.sub-disclaimer a{color:var(--ink-3);text-decoration:underline}
+
+/* SECTIONS */
+.sec{padding:80px 52px}
+.sec-inner{max-width:1100px;margin:0 auto}
+.ey{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:14px;font-family:var(--b);
+}
+.ey::before{content:'';display:block;width:18px;height:2.5px;background:var(--coral);border-radius:2px}
+.sec-h{
+  font-family:var(--h);font-size:clamp(28px,3.8vw,46px);
+  font-weight:900;letter-spacing:-1.5px;line-height:1.1;margin-bottom:14px;
+}
+.sec-h em{font-style:normal;color:var(--coral)}
+.sec-p{font-size:17px;color:var(--ink-2);max-width:500px;line-height:1.7}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:400px 1fr;gap:60px;align-items:start;margin-top:48px}
+.about-card{
+  background:var(--white);border:1px solid var(--border-2);
+  border-radius:var(--r-xl);padding:32px;
+  box-shadow:0 4px 24px rgba(26,26,46,.05);margin-bottom:14px;
+}
+.av-row{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.av-circle{
+  width:64px;height:64px;border-radius:50%;background:var(--yellow);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--h);font-size:22px;font-weight:900;color:var(--ink);
+  border:3px solid var(--cream-3);flex-shrink:0;
+}
+.av-name{font-family:var(--h);font-size:18px;font-weight:900;letter-spacing:-.2px}
+.av-role{font-size:12px;color:var(--ink-3);margin-top:2px;font-weight:500}
+.about-card p{font-size:14px;color:var(--ink-2);line-height:1.75;margin-bottom:12px}
+.about-card p:last-child{margin-bottom:0}
+.about-card p strong{color:var(--ink);font-weight:700}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.stat-box{background:var(--cream);border:1px solid var(--border);border-radius:var(--r);padding:14px;text-align:center}
+.stat-n{font-family:var(--h);font-size:22px;font-weight:900;line-height:1}
+.stat-l{font-size:11px;color:var(--ink-3);margin-top:4px;font-weight:500}
+
+.about-body p{font-size:16px;color:var(--ink-2);line-height:1.8;margin-bottom:16px}
+.about-body p strong{color:var(--ink);font-weight:700}
+.about-body p em{font-style:italic;color:var(--coral);font-family:var(--h);font-weight:800}
+.hl-list{display:flex;flex-direction:column;gap:9px;margin-top:22px}
+.hl{display:flex;gap:12px;align-items:flex-start;padding:13px 16px;background:var(--cream);border:1px solid var(--border);border-radius:var(--r)}
+.hl-ico{font-size:17px;flex-shrink:0;margin-top:1px}
+.hl-t{font-size:13px;color:var(--ink-2);line-height:1.55}
+.hl-t strong{color:var(--ink);font-weight:700}
+
+/* PHILOSOPHY */
+.philo{background:var(--ink);padding:80px 52px}
+.philo .ey{color:rgba(245,240,232,.3)}
+.philo .ey::before{background:var(--coral)}
+.philo .sec-h{color:var(--cream)}
+.philo .sec-p{color:rgba(245,240,232,.5);margin-bottom:48px}
+.pillars{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border:1px solid rgba(245,240,232,.1);border-radius:var(--r-xl);overflow:hidden;
+}
+.pillar{padding:38px 32px;border-right:1px solid rgba(245,240,232,.08);transition:background .25s}
+.pillar:last-child{border-right:none}
+.pillar:hover{background:rgba(245,240,232,.04)}
+.pillar-n{font-size:11px;font-weight:700;letter-spacing:.1em;color:rgba(245,240,232,.22);margin-bottom:18px}
+.pillar-e{font-size:30px;margin-bottom:14px;display:block}
+.pillar h3{font-family:var(--h);font-size:21px;font-weight:900;color:var(--cream);margin-bottom:10px;letter-spacing:-.3px}
+.pillar p{font-size:13px;color:rgba(245,240,232,.48);line-height:1.65}
+.pillar-ch{display:inline-block;margin-top:18px;font-size:11px;font-weight:600;padding:4px 12px;border-radius:100px;border:1px solid rgba(245,240,232,.14);color:rgba(245,240,232,.38)}
+
+/* CASES */
+.cases-bg{background:var(--cream-2)}
+.cases-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:48px}
+.case-card{
+  background:var(--white);border:1px solid var(--border-2);
+  border-radius:var(--r-xl);padding:34px;
+  text-decoration:none;color:inherit;display:block;position:relative;
+  transition:transform .2s,box-shadow .2s;
+}
+.case-card:hover{transform:translateY(-4px);box-shadow:0 18px 52px rgba(26,26,46,.10)}
+.case-cat{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
+.cat-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.case-arr{
+  position:absolute;top:26px;right:26px;
+  width:34px;height:34px;border-radius:50%;
+  background:var(--cream);border:1px solid var(--border-2);
+  display:flex;align-items:center;justify-content:center;font-size:15px;transition:all .2s;
+}
+.case-card:hover .case-arr{background:var(--coral);color:#fff;border-color:var(--coral)}
+.case-card h3{font-family:var(--h);font-size:21px;font-weight:900;line-height:1.2;margin-bottom:10px;letter-spacing:-.3px}
+.case-card p{font-size:13px;color:var(--ink-3);line-height:1.65;margin-bottom:22px}
+.metrics{display:flex;gap:9px;flex-wrap:wrap}
+.met{background:var(--cream);border-radius:9px;padding:8px 13px;font-size:12px;color:var(--ink-2)}
+.met strong{display:block;font-size:14px;font-weight:800;color:var(--ink);line-height:1.2;font-family:var(--h)}
+.case-soon{
+  background:transparent;border:2px dashed var(--border-2);
+  border-radius:var(--r-xl);padding:34px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:200px;color:var(--ink-3);
+}
+.cs-ico{font-size:32px;opacity:.2}
+.cs-t{font-family:var(--h);font-size:17px;font-weight:800;color:var(--ink-2)}
+.cs-s{font-size:13px;text-align:center;max-width:200px}
+
+/* WRITING */
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:48px}
+.blog-card{
+  background:var(--white);border:1px solid var(--border-2);border-radius:var(--r-xl);overflow:hidden;
+  text-decoration:none;color:inherit;transition:transform .2s,box-shadow .2s;
+}
+.blog-card:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(26,26,46,.08)}
+.blog-thumb{height:158px;display:flex;align-items:center;justify-content:center;font-size:50px}
+.blog-body{padding:22px 24px}
+.blog-cat{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px}
+.blog-card h3{font-family:var(--h);font-size:18px;font-weight:800;line-height:1.25;margin-bottom:9px;letter-spacing:-.2px}
+.blog-card p{font-size:13px;color:var(--ink-3);line-height:1.6;margin-bottom:14px}
+.blog-read{font-size:13px;font-weight:700;color:var(--coral)}
+
+/* WORK */
+.work-bg{background:var(--cream-2)}
+.work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:48px}
+.work-card{
+  background:var(--white);border:1px solid var(--border-2);border-radius:var(--r-xl);padding:30px;position:relative;transition:transform .2s;
+}
+.work-card:hover{transform:translateY(-2px)}
+.work-card.feat{border:2.5px solid var(--coral)}
+.work-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--coral);color:#fff;font-size:12px;font-weight:800;padding:4px 18px;border-radius:100px;white-space:nowrap}
+.work-ico{font-size:30px;margin-bottom:16px;display:block}
+.work-card h3{font-family:var(--h);font-size:21px;font-weight:900;margin-bottom:9px;letter-spacing:-.3px}
+.work-card p{font-size:14px;color:var(--ink-2);line-height:1.65;margin-bottom:18px}
+.work-price{font-family:var(--h);font-size:26px;font-weight:900;margin-bottom:16px;letter-spacing:-.5px}
+.work-price span{font-size:14px;font-weight:400;color:var(--ink-3);font-family:var(--b)}
+.work-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:22px}
+.work-list li{font-size:13px;color:var(--ink-2);display:flex;gap:8px}
+.work-list li::before{content:'✓';color:var(--teal);font-weight:800;flex-shrink:0}
+.work-link{
+  display:block;text-align:center;text-decoration:none;
+  padding:12px;border-radius:100px;font-size:14px;font-weight:700;
+  border:2px solid var(--border-2);color:var(--ink);transition:all .2s;font-family:var(--b);
+}
+.work-link:hover{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.work-card.feat .work-link{background:var(--coral);color:#fff;border-color:var(--coral)}
+.work-card.feat .work-link:hover{background:var(--coral-d);border-color:var(--coral-d)}
+
+/* FOOTER */
+footer{
+  background:var(--ink);padding:40px 52px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px;
+}
+.ft-logo{font-family:var(--h);font-size:19px;font-weight:900;color:var(--cream);text-decoration:none;letter-spacing:-.3px}
+.ft-logo span{background:var(--coral);border-radius:6px;padding:1px 5px;margin-left:2px;color:#fff}
+.ft-links{display:flex;gap:24px}
+.ft-links a{font-size:13px;color:rgba(245,240,232,.5);text-decoration:none;font-weight:500;transition:color .2s}
+.ft-links a:hover{color:var(--cream)}
+.ft-note{font-size:12px;color:rgba(245,240,232,.28)}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  nav{padding:0 20px}.nav-links{display:none}
+  .sec,.philo,.cases-bg,.work-bg{padding:60px 20px}
+  .sub-wrap{padding:40px 20px}
+  .hero{padding:90px 20px 56px}
+  .hero-wrap{grid-template-columns:1fr;gap:40px}
+  .yellow-bg{width:260px;height:260px}
+  .photo-frame{width:240px;height:280px}
+  .text-col{padding-left:0}
+  .sub-card{grid-template-columns:1fr;gap:32px;padding:36px 28px}
+  .about-grid{grid-template-columns:1fr}
+  .pillars{grid-template-columns:1fr}
+  .pillar{border-right:none;border-bottom:1px solid rgba(245,240,232,.08)}
+  .cases-grid,.work-grid,.blog-grid{grid-template-columns:1fr}
+  footer{padding:32px 20px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">Prashanth<span>G</span></a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#cases">Case Studies</a>
+    <a href="#writing">Writing</a>
+    <a href="#work">Work with me</a>
+    <a href="#newsletter" class="nav-cta">Get the Newsletter</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <div class="hero-wrap">
+
+    <!-- Photo -->
+    <div class="photo-col">
+      <!-- deco top-right dots -->
+      <div class="deco-dots-grid" style="top:10px;right:20px">
+        <div class="dg-dot"></div><div class="dg-dot"></div><div class="dg-dot"></div><div class="dg-dot"></div>
+        <div class="dg-dot"></div><div class="dg-dot"></div><div class="dg-dot"></div><div class="dg-dot"></div>
+        <div class="dg-dot"></div><div class="dg-dot"></div><div class="dg-dot"></div><div class="dg-dot"></div>
+      </div>
+      <!-- yellow star -->
+      <div class="deco-star" style="top:18px;left:24px">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+          <path d="M18 3l2.5 9.5H31L23 18.5l3 9.5-8-5.8-8 5.8 3-9.5L5 12.5h10.5z" fill="#f5c842"/>
+        </svg>
+      </div>
+      <!-- coral squiggle -->
+      <svg style="position:absolute;bottom:20px;left:0;z-index:2" width="50" height="64" viewBox="0 0 50 64" fill="none">
+        <path d="M38 5 C18 5,6 18,11 30 S28 46,16 60" stroke="#f07050" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+        <path d="M10 55 L16 60 L21 54" stroke="#f07050" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <div class="yellow-bg">
+        <div class="photo-frame">
+          <div class="photo-initials">PG</div>
+          <div class="photo-add-note">📸 Add your photo here</div>
+        </div>
+      </div>
+      <div class="location-chip">📍 Bengaluru, India</div>
+    </div>
+
+    <!-- Text -->
+    <div class="text-col rv">
+      <h1 class="greeting">
+        Hey Friends <span class="wave">👋</span><br>
+        <span class="name-line">I'm Prashanth.</span>
+      </h1>
+
+      <p class="hero-bio">
+        I'm a <strong>QA Automation Engineer</strong> turned consultant — building <strong>IoT systems on AWS</strong> by day, growing <strong>founders' brands</strong> by evening, and documenting my journey to <a href="#newsletter">full remote freedom</a> in 12 months.
+      </p>
+
+      <div class="hero-btns">
+        <a href="#newsletter" class="btn-fill">
+          Get my weekly letter
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#cases" class="btn-out">See my work →</a>
+      </div>
+
+      <div class="chips">
+        <div class="chip"><div class="chip-dot" style="background:var(--teal)"></div>10+ yrs in QA</div>
+        <div class="chip"><div class="chip-dot" style="background:var(--coral)"></div>Active consulting client</div>
+        <div class="chip"><div class="chip-dot" style="background:var(--yellow-d)"></div>IoT + AWS stack</div>
+        <div class="chip"><div class="chip-dot" style="background:var(--purple)"></div>Remote in 12 months</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBSCRIBE — Ali Abdaal LifeNotes style -->
+<div id="newsletter" class="sub-wrap">
+  <!-- coral squiggle arrow top-right, just like Ali's page -->
+  <svg style="position:absolute;top:8px;right:72px;z-index:0;pointer-events:none" width="56" height="72" viewBox="0 0 56 72" fill="none">
+    <path d="M44 6 C22 6, 8 22, 14 36 S34 54, 20 68" stroke="#f07050" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+    <path d="M14 62 L20 68 L26 62" stroke="#f07050" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+
+  <div class="sub-card rv">
+
+    <!-- LEFT — title + social proof -->
+    <div class="sub-left">
+      <span class="sub-title-top">Subscribe to</span>
+      <span class="sub-title-bold">
+        PerformOS
+        <!-- paper plane SVG exactly like Ali's purple/lavender plane -->
+        <svg class="sub-plane-svg" width="52" height="44" viewBox="0 0 52 44" fill="none">
+          <path d="M4 22 L48 4 L36 40 L24 28 Z" fill="#b8b0e8" stroke="#9089d4" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M24 28 L48 4" stroke="#9089d4" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M24 28 L22 40 L30 34" fill="#d4cfee" stroke="#9089d4" stroke-width="1.2" stroke-linejoin="round"/>
+          <!-- speed lines -->
+          <path d="M2 18 L10 20" stroke="#9089d4" stroke-width="1.5" stroke-linecap="round" opacity=".5"/>
+          <path d="M4 24 L11 24" stroke="#9089d4" stroke-width="1.5" stroke-linecap="round" opacity=".5"/>
+          <path d="M2 30 L10 27" stroke="#9089d4" stroke-width="1.5" stroke-linecap="round" opacity=".5"/>
+        </svg>
+      </span>
+
+      <p class="sub-community">
+        Join a growing community of more than<br>
+        <strong>1,000+ readers building in public.</strong>
+      </p>
+
+      <!-- avatar stack + stars, exactly like Ali's -->
+      <div class="sub-social-proof">
+        <div class="sub-avatars">
+          <div class="sub-avatar" style="background:#f5c842;color:#1a1a2e">A</div>
+          <div class="sub-avatar" style="background:#3bc4b8;color:#fff">B</div>
+          <div class="sub-avatar" style="background:#f07050;color:#fff">C</div>
+        </div>
+        <div class="sub-stars-wrap">
+          <div class="sub-stars">
+            <span class="sub-star">★</span>
+            <span class="sub-star">★</span>
+            <span class="sub-star">★</span>
+            <span class="sub-star">★</span>
+            <span class="sub-star">★</span>
+          </div>
+          <div class="sub-reviews">50+ happy readers</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT — description + form -->
+    <div class="sub-right">
+      <p class="sub-desc">
+        Each week, I share one QA automation insight, one consulting lesson, and one fitness or lifestyle habit — all from what I'm actually doing right now. It's free to join, and always will be.
+      </p>
+
+      <form class="sub-form" onsubmit="return false;">
+        <input type="email" class="sub-in" placeholder="Your email">
+        <button type="submit" class="sub-btn">Subscribe</button>
+      </form>
+
+      <p class="sub-disclaimer">
+        By subscribing, you'll get my weekly PerformOS letter every Sunday. I sometimes mention tools or resources I genuinely use. You can opt out at any time with no hard feelings 😊
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="sec" id="about">
+  <div class="sec-inner">
+    <span class="ey">About me</span>
+    <div class="about-grid">
+      <div class="rv">
+        <div class="about-card">
+          <div class="av-row">
+            <div class="av-circle">PG</div>
+            <div>
+              <div class="av-name">Prashanth Galagali</div>
+              <div class="av-role">QA Engineer · Consultant · Builder</div>
+            </div>
+          </div>
+          <p>Started in QA automation 10+ years ago. Spent a decade being very well paid to find bugs. But always felt there was more to build.</p>
+          <p>Right now: <strong>sole QA engineer building IoT automation on AWS from scratch</strong> — and consulting on the side, helping a senior IAS officer grow their brand and build operational systems.</p>
+          <p>Goal: <strong>full location independence in 12 months.</strong> This site is my public commitment to that journey.</p>
+        </div>
+        <div class="stats-row">
+          <div class="stat-box"><div class="stat-n" style="color:var(--coral)">10+</div><div class="stat-l">Years in QA</div></div>
+          <div class="stat-box"><div class="stat-n" style="color:var(--teal)">1</div><div class="stat-l">Live client</div></div>
+          <div class="stat-box"><div class="stat-n" style="color:var(--purple)">3</div><div class="stat-l">Skill pillars</div></div>
+        </div>
+      </div>
+
+      <div class="about-body rv d1">
+        <h2 class="sec-h">I didn't find my niche.<br><em>I built it.</em></h2>
+        <p>Most people with 10 years in QA stay in QA. I decided to use the same systems-thinking skills to build something bigger — a consulting practice spanning <strong>technology, brand growth, and human performance.</strong></p>
+        <p>I'm currently the only QA engineer on a project building <strong>IoT + AWS + Web automation</strong> — a stack most engineers haven't touched. Every problem I solve is new territory, and I document all of it publicly.</p>
+        <p>My client, <strong>Mentora IAS</strong>, pays ₹25,000/month for gap analysis, systems building, and digital brand strategy. That's not theory. That's proof.</p>
+        <p><em>The goal isn't to work more. It's to build systems so good that life works even when I'm not.</em></p>
+        <div class="hl-list">
+          <div class="hl"><div class="hl-ico">⚙️</div><div class="hl-t"><strong>Technical edge:</strong> IoT + AWS automation is rare. Building it publicly creates a portfolio no resume can replicate.</div></div>
+          <div class="hl"><div class="hl-ico">📈</div><div class="hl-t"><strong>Consulting proof:</strong> Already paid to find gaps, build systems, and grow a client's brand. Receipts, not promises.</div></div>
+          <div class="hl"><div class="hl-ico">🏋️</div><div class="hl-t"><strong>The belief:</strong> Your best work comes from a fit body and a clear mind. Fitness is the foundation, not a side quest.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philo">
+  <div class="sec-inner">
+    <span class="ey">My philosophy</span>
+    <h2 class="sec-h" style="color:var(--cream)">One life.<br><em style="color:#f5c842">Three operating systems.</em></h2>
+    <p class="sec-p">Real freedom comes from mastering the intersection of three disciplines — not just one.</p>
+    <div class="pillars rv">
+      <div class="pillar">
+        <div class="pillar-n">01 / 03</div>
+        <span class="pillar-e">⚙️</span>
+        <h3>Systems & Quality</h3>
+        <p>10+ years in QA automation. Now architecting IoT + AWS automation solo — every problem here is frontier territory almost no one else has documented.</p>
+        <span class="pillar-ch">QA · IoT · AWS · Automation</span>
+      </div>
+      <div class="pillar">
+        <div class="pillar-n">02 / 03</div>
+        <span class="pillar-e">📈</span>
+        <h3>Brand & Growth</h3>
+        <p>Helping founders and professionals build digital presence and operational systems that run without them. Currently managing growth strategy for a senior IAS officer.</p>
+        <span class="pillar-ch">Marketing · PR · Content OS</span>
+      </div>
+      <div class="pillar">
+        <div class="pillar-n">03 / 03</div>
+        <span class="pillar-e">🏋️</span>
+        <h3>Human Performance</h3>
+        <p>Fitness and lifestyle design aren't separate from your best work — they're the foundation of it. I train 5 days a week and document what I learn.</p>
+        <span class="pillar-ch">Fitness · Habits · Lifestyle</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASES -->
+<section class="sec cases-bg" id="cases">
+  <div class="sec-inner">
+    <span class="ey">Case studies</span>
+    <h2 class="sec-h">Real problems.<br><em>Real solutions.</em></h2>
+    <p class="sec-p">Every significant problem I encounter gets documented — so you can apply the same thinking to your work.</p>
+    <div class="cases-grid">
+      <a href="#" class="case-card rv">
+        <div class="case-arr">→</div>
+        <div class="case-cat"><div class="cat-dot" style="background:var(--blue)"></div><span style="color:var(--blue)">IoT · QA Automation</span></div>
+        <h3>Building IoT test automation on AWS — from absolute zero</h3>
+        <p>Joined as the only QA engineer with no automation in place. Here's how I architected a test framework for AWS + IoT + Web that had never been tested before.</p>
+        <div class="metrics">
+          <div class="met"><strong>0 → 1</strong>Framework built</div>
+          <div class="met"><strong>3 layers</strong>AWS · IoT · Web</div>
+          <div class="met"><strong>Solo</strong>QA engineer</div>
+        </div>
+      </a>
+      <a href="#" class="case-card rv d1">
+        <div class="case-arr">→</div>
+        <div class="case-cat"><div class="cat-dot" style="background:var(--teal)"></div><span style="color:var(--teal)">Consulting · Operations</span></div>
+        <h3>How I found 5 critical gaps in a client's operations in week one</h3>
+        <p>My exact framework for walking into a new consulting engagement and finding where time, money and attention are being lost — using Mentora IAS as the live example.</p>
+        <div class="metrics">
+          <div class="met"><strong>5 gaps</strong>Identified</div>
+          <div class="met"><strong>Week 1</strong>Turnaround</div>
+          <div class="met"><strong>Active</strong>Retainer</div>
+        </div>
+      </a>
+      <a href="#" class="case-card rv d2">
+        <div class="case-arr">→</div>
+        <div class="case-cat"><div class="cat-dot" style="background:var(--coral)"></div><span style="color:var(--coral)">Digital Marketing · Brand</span></div>
+        <h3>Building a content OS for a senior IAS officer's personal brand</h3>
+        <p>How I built a social media and content system for a high-profile public figure that publishes consistently without daily effort from either of us.</p>
+        <div class="metrics">
+          <div class="met"><strong>1 system</strong>Content OS</div>
+          <div class="met"><strong>Weekly</strong>Publishing</div>
+          <div class="met"><strong>Growing</strong>Results</div>
+        </div>
+      </a>
+      <div class="case-soon rv d3">
+        <div class="cs-ico">+</div>
+        <div class="cs-t">More on the way</div>
+        <div class="cs-s">I document every major problem I solve. Subscribe to get notified first.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WRITING -->
+<section class="sec" id="writing">
+  <div class="sec-inner">
+    <span class="ey">Writing</span>
+    <h2 class="sec-h">Ideas worth <em>sharing.</em></h2>
+    <p class="sec-p">Weekly insights from QA engineering, consulting, and building a life on your own terms.</p>
+    <div class="blog-grid">
+      <a href="#" class="blog-card rv">
+        <div class="blog-thumb" style="background:var(--teal-lt)">⚙️</div>
+        <div class="blog-body">
+          <div class="blog-cat">QA Systems</div>
+          <h3>Why IoT QA is fundamentally different from web testing</h3>
+          <p>The mental model shift you need when devices can fail in 50 ways no API test anticipated.</p>
+          <span class="blog-read">Read article →</span>
+        </div>
+      </a>
+      <a href="#" class="blog-card rv d1">
+        <div class="blog-thumb" style="background:var(--blue-lt)">📊</div>
+        <div class="blog-body">
+          <div class="blog-cat">Consulting</div>
+          <h3>The 5 questions I ask every new client in week one</h3>
+          <p>Before I build anything, I ask these. They always surface the real problem under the stated one.</p>
+          <span class="blog-read">Read article →</span>
+        </div>
+      </a>
+      <a href="#" class="blog-card rv d2">
+        <div class="blog-thumb" style="background:var(--coral-lt)">🏋️</div>
+        <div class="blog-body">
+          <div class="blog-cat">Lifestyle</div>
+          <h3>How I train 5 days a week alongside a full-time job and a side client</h3>
+          <p>The system that keeps me consistent without burning out.</p>
+          <span class="blog-read">Read article →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="sec work-bg" id="work">
+  <div class="sec-inner">
+    <span class="ey">Work with me</span>
+    <h2 class="sec-h">Let's build something<br><em>that outlasts your time.</em></h2>
+    <p class="sec-p">QA automation, digital brand strategy, or a retainer that covers both — here's how I can help.</p>
+    <div class="work-grid">
+      <div class="work-card rv">
+        <span class="work-ico">🔍</span>
+        <h3>QA Audit</h3>
+        <p>A focused review of your QA process. I find the gaps, map the risks, and give you a clear automation roadmap.</p>
+        <div class="work-price">₹40,000 <span>/ one-time</span></div>
+        <ul class="work-list">
+          <li>Full QA process review</li>
+          <li>Automation readiness check</li>
+          <li>Written report + roadmap</li>
+          <li>60-min debrief call</li>
+        </ul>
+        <a href="#" class="work-link">Book an audit</a>
+      </div>
+      <div class="work-card feat rv d1">
+        <div class="work-badge">Most popular</div>
+        <span class="work-ico">🚀</span>
+        <h3>Consulting Retainer</h3>
+        <p>Ongoing access across systems, brand, and performance. Embedded in your world — not just advising from the outside.</p>
+        <div class="work-price">₹60,000 <span>/ month</span></div>
+        <ul class="work-list">
+          <li>QA systems + automation support</li>
+          <li>Digital marketing strategy</li>
+          <li>Operations gap analysis</li>
+          <li>Weekly strategy call</li>
+          <li>Async WhatsApp access</li>
+        </ul>
+        <a href="#" class="work-link">Apply to work together</a>
+      </div>
+      <div class="work-card rv d2">
+        <span class="work-ico">💼</span>
+        <h3>Remote Hire</h3>
+        <p>Looking for a senior QA automation engineer with IoT + AWS experience for your remote team? Let's talk.</p>
+        <div class="work-price">Open <span>to offers</span></div>
+        <ul class="work-list">
+          <li>IoT + AWS + Web automation</li>
+          <li>10+ years QA experience</li>
+          <li>Remote-first, async-friendly</li>
+          <li>Available from Q3 2025</li>
+        </ul>
+        <a href="#" class="work-link">Send me a message</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="ft-logo">Prashanth<span>G</span></a>
+  <div class="ft-links">
+    <a href="#">LinkedIn</a>
+    <a href="#">Instagram</a>
+    <a href="#">GitHub</a>
+    <a href="#newsletter">Newsletter</a>
+    <a href="#work">Work with me</a>
+  </div>
+  <div class="ft-note">Building in public · Bengaluru → Remote · 2025</div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(e => {
+    e.forEach(x => { if(x.isIntersecting){ x.target.classList.add('in'); io.unobserve(x.target); } });
+  }, {threshold:0.08});
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+  const ss = document.querySelectorAll('section[id],div[id]');
+  const nl = document.querySelectorAll('.nav-links a[href^="#"]');
+  window.addEventListener('scroll', () => {
+    let c = '';
+    ss.forEach(s => { if(window.scrollY >= s.offsetTop-90) c = s.id; });
+    nl.forEach(a => { a.style.color = a.getAttribute('href')==='#'+c ? 'var(--coral)' : ''; });
+  });
+</script>
+</body>
+</html>
